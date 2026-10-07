@@ -86,6 +86,8 @@ AW に見つけてもらう／直してもらうための題材を、あえて�
 | [`security-review.md`](.github/workflows/security-review.md) | 週次 / 手動 | 依存の脆弱性とコード上の懸念を調査 | `create-issue` |
 | [`issue-auto-fix.md`](.github/workflows/issue-auto-fix.md) | `Issue トリアージ` 完了後、Issue に `agent-fix` ラベルあり | 内容を読んで最小修正を行いドラフト PR を作成 | `create-pull-request` / `add-comment` |
 
+`tech-debt-hunter` の週次実行では、最後に AI 調査が正常完了した `main` の SHA と今回の SHA を比較し、監視対象に未調査の変更がある場合だけ AI 調査とレポート Issue 作成を行います。監視対象は `src/**`、Gradle のビルド定義・Wrapper、調査ワークフロー、および共有のエージェント／指示／スキル定義です。初回実行や前回失敗後の未調査変更は調査し、手動実行は常に調査します。`main` 以外のブランチで手動実行しても、週次実行の比較基準は更新しません。なお、軽量な変更チェックの GitHub Actions 実行自体は毎週行われます。`security-review` は新しい脆弱性を検知できるよう、変更の有無にかかわらず週次実行します。
+
 ### なぜ AW が向いているのか
 
 - **判断が必要で定型化しづらい作業**（トリアージ、失敗原因の切り分け、優先度付け）を任せられる。
