@@ -54,6 +54,14 @@ class BookControllerTest {
     }
 
     @Test
+    void 著者名の部分一致で蔵書を検索できる() throws Exception {
+        mockMvc.perform(get("/api/books").param("keyword", "著"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].id").value(book.getId()));
+    }
+
+    @Test
     void ISBNが不正な場合は400を返す() throws Exception {
         mockMvc.perform(post("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)

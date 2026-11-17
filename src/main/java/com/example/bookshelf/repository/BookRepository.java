@@ -10,5 +10,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<Book> findByIsbn(String isbn);
 
     // TODO: 蔵書が増えるとレスポンスが肥大化するため、Pageable を受け取る検索に置き換える
-    List<Book> findByTitleContainingIgnoreCase(String keyword);
+    List<Book> findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(
+            String titleKeyword, String authorKeyword);
 }

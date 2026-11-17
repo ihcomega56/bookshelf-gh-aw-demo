@@ -30,7 +30,7 @@ public class BookController {
 
     @GetMapping
     public List<BookResponse> list(@RequestParam(name = "keyword", required = false) String keyword) {
-        return bookshelfService.searchBooksByTitle(keyword).stream()
+        return bookshelfService.searchBooks(keyword).stream()
                 .map(BookResponse::from)
                 .toList();
     }

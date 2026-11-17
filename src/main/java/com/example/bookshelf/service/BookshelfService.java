@@ -37,11 +37,11 @@ public class BookshelfService {
     }
 
     @Transactional(readOnly = true)
-    public List<Book> searchBooksByTitle(String keyword) {
+    public List<Book> searchBooks(String keyword) {
         if (keyword == null || keyword.isBlank()) {
             return bookRepository.findAll();
         }
-        return bookRepository.findByTitleContainingIgnoreCase(keyword);
+        return bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(keyword, keyword);
     }
 
     @Transactional(readOnly = true)
