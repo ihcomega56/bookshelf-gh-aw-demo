@@ -75,11 +75,12 @@ AW に見つけてもらう／直してもらうための題材を、あえて�
 
 ## 2. AW の使い所
 
-このリポジトリには 6 つの Agentic Workflow があります。実体は `.github/workflows/*.md`（人が書く指示）と、そこからコンパイルされた `*.lock.yml`（GitHub Actions ワークフロー）のペアです。
+このリポジトリには 7 つの Agentic Workflow があります。実体は `.github/workflows/*.md`（人が書く指示）と、そこからコンパイルされた `*.lock.yml`（GitHub Actions ワークフロー）のペアです。
 
 | ワークフロー | トリガー | やること | 出力 (safe-outputs) |
 | --- | --- | --- | --- |
 | [`issue-triage.md`](.github/workflows/issue-triage.md) | Issue の作成・再オープン | 内容を読んでラベル付与と確認コメント | `add-labels` / `add-comment` |
+| [`issue-comment-answer.md`](.github/workflows/issue-comment-answer.md) | Issue への新しいコメント | 質問であれば日本語で回答 | `add-comment` |
 | [`ci-doctor.md`](.github/workflows/ci-doctor.md) | `CI` ワークフローの失敗 (`workflow_run`) | ログとコードから原因仮説と対処方針を作成 | `create-issue` |
 | [`tech-debt-hunter.md`](.github/workflows/tech-debt-hunter.md) | 週次 / 手動 | TODO とリファクタリング候補を棚卸しして優先度付け | `create-issue` |
 | [`test-gap-filler.md`](.github/workflows/test-gap-filler.md) | Issue/PR への `/add-tests` コメント | 不足しているテストを追加した PR を作成 | `create-pull-request` / `add-comment` |
