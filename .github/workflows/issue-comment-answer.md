@@ -6,7 +6,7 @@ on:
   issue_comment:
     types: [created]
 
-if: ${{ github.event.issue.pull_request == null && github.event.comment.user.type != 'Bot' }}
+if: ${{ github.event.issue.pull_request == null && github.event.comment.user.type != 'Bot' && contains(github.event.comment.body, 'copilot-ask') }}
 
 permissions: read-all
 
