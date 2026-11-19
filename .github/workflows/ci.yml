@@ -26,7 +26,19 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: ビルドとテスト
-        run: ./gradlew build --no-daemon
+        run: ./gradlew build jacocoTestReport --no-daemon
+
+      - name: JaCoCo XML を Cobertura XML に変換
+        run: |
+          python3 scripts/jacoco_to_cobertura.py \
+            build/reports/jacoco/test/jacocoTestReport.xml \
+            build/reports/coverage/cobertura.xml
+
+      - name: カバレッジレポートをアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: build/reports/coverage/cobertura.xml
 
   verify-agentic-workflows:
     if: github.event_name == 'pull_request'
